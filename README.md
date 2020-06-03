@@ -41,11 +41,15 @@ We tried 3 classifiers -- Logistic Regression, Random Forest Classifier and Grad
 
 ### Gradient Boosting Classifier
 
-The first model we tried was actually Gradient Boosting Classifier because it usually provides better results than our classifiers. We firstly checked whether it's a good idea to resample the training data since only 22% of the customers churned (not really a sign for imbalanced data, but we would like to see whether resampling helps). In the training data, we kept all of the data with negative labels (not churned) and upsampled the data with positive labels with a multiplier. If the multiplier is 3, we would sample 3 times of the original data (with positive labels). We tried the multipliers 3, 2, 1.5 and 1. For each multiplier we run the modeling pipeline (including training and validation set split) for 3 times to get more robust model evaluation. The AUC scores for the 4 models are actually pretty close --- they all fall between 0.75 and 0.77 and the average AUC scores are around 0.76. We decided to use the multiplier 3. When tuning the parameters of the Gradient Boosting, we found that the results didn't vary a lot when we use different parameters. The AUC store still maintained between 0.76 and 0.77.
+The first model we tried was actually Gradient Boosting Classifier because it usually provides better results than other classifiers. We firstly checked whether it's a good idea to resample the training data since only 22% of the customers churned (not really a sign for imbalanced data, but we would like to see whether resampling helps). In the training data, we kept all of the data with negative labels (not churned) and upsampled the data with positive labels with a multiplier. If the multiplier is 3, we would sample 3 times of the original data (with positive labels). We tried the multipliers 3, 2, 1.5 and 1. For each multiplier we run the modeling pipeline (including training and validation set split) for 3 times to get more robust model evaluation. 
+
+![workflow](https://raw.githubusercontent.com/tianyiwangnova/2020_project__Music_Streaming_App_Churn_Prediction/master/screenshots/resample.png)
+
+The AUC scores for the 4 models are actually pretty close --- they all fall between 0.75 and 0.77 and the average AUC scores are around 0.76. We decided to use the multiplier 3. When tuning the parameters of the Gradient Boosting, we found that the results didn't vary a lot when we use different parameters. The AUC store still maintained between 0.76 and 0.77.
 
 ### Random Forest Classifier
 
-We followed the same modeling tuning procedure in the above section to tune random forest classifier. Interestingly before we tune the classifier parameters we only got AUC scores between 0.73 and 0.74. After tuning the classifier parameters the AUC scores reached more than 0.76.
+We followed the same modeling tuning procedure in the above section to tune random forest classifier. Interestingly before we tuned the classifier parameters we only got AUC scores between 0.73 and 0.74. After tuning the classifier parameters (increasing `max_depth` from 5 to 8) the AUC scores reached more than 0.76.
 
 ![result](https://raw.githubusercontent.com/tianyiwangnova/2020_project__Music_Streaming_App_Churn_Prediction/master/screenshots/model%20result.png)
 
